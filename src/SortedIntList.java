@@ -135,7 +135,19 @@ public class SortedIntList {
     public void setUnique(boolean value) {  // Toggle uniqueness in array. Needs to delete any copies of vaules if set to true.
     	unique = value;
     	if (value = true){			//need to delete duplicates in array.
+    		int[] newarr = new int[DEFAULT_CAPACITY];
+    		int count = 0;
+    		for (int i=0; i < size; i++)
+    			if (elementData[i] == elementData[i+1]) {
+    				count++;
+    			} else {
+    				newarr[i-count] = elementData[i];
+    			}
     		
+    		for(int i=0; i < newarr.length; i++)
+    			elementData[i]=newarr[i];
+    		for(int c=0; c<count; c++)
+    			size--;
     	}
     }
 }
@@ -178,9 +190,11 @@ class SortedIntListApp {
 		int value2 = 44;
 		arr.indexOf(value2);
 		
-		arr.size();
 		arr.setUnique(false);
 		arr.add(11111);
+		arr.add(3);
+		
+		arr.display();
 		
 		arr.setUnique(true);
 		arr.display();
